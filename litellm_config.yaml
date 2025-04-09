@@ -19,6 +19,6 @@ general_settings:
 
 litellm_settings:
   request_timeout: 600    # raise Timeout error if call takes longer than 600 seconds. Default value is 6000seconds if not set
-  set_verbose: False      # Switch off Debug Logging, ensure your logs do not have any debugging on
+  set_verbose: True     # Switch off Debug Logging, ensure your logs do not have any debugging on
   json_logs: True         # Get debug logs in json format
   drop_params: True       # Drop unsupported params
