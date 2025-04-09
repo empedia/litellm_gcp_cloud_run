@@ -1,16 +1,24 @@
-general_settings:
-  database_connection_pool_limit: 20
 
 model_list:
-  - model_name: fake-openai-endpoint
+  - model_name: gpt-3.5-turbo
     litellm_params:
-      model: openai/my-fake-model
-      api_key: my-fake-key
-      api_base: https://exampleopenaiendpoint-production.up.railway.app/
+      model: "gemini/gemini-2.0-flash-thinking-exp-01-21"
+      api_key: "os.environ/GOOGLE_API_KEY"
+      api_base: "os.environ/GOOGLE_API_BASE"
+      ap1_version: "v1beta"
+
+general_settings:
+  master_key: "os.environ/MASTER_KEY"
+  proxy_batch_write_at: 60 # Batch write spend updates every 60s
+  database_connection_pool_limit: 10 # limit the number of database connections to = MAX Number of DB Connections/Number of instances of litellm proxy (Around 10-20 is good number)
+
+  # OPTIONAL Best Practices
+  disable_spend_logs: True # turn off writing each transaction to the db. We recommend doing this is you don't need to see Usage on the LiteLLM UI and are tracking metrics via Prometheus
+  disable_error_logs: True # turn off writing LLM Exceptions to DB
+  allow_requests_on_db_unavailable: True # Only USE when running LiteLLM on your VPC. Allow requests to still be processed even if the DB is unavailable. We recommend doing this if you're running LiteLLM on VPC that cannot be accessed from the public internet.
 
 litellm_settings:
-  drop_params: True
-  success_callback: ["prometheus"]
-  failure_callback: ["prometheus"]
-  service_callback: ["prometheus_system"]
-
+  request_timeout: 600    # raise Timeout error if call takes longer than 600 seconds. Default value is 6000seconds if not set
+  set_verbose: False      # Switch off Debug Logging, ensure your logs do not have any debugging on
+  json_logs: True         # Get debug logs in json format
+  drop_params: True       # Drop unsupported params
