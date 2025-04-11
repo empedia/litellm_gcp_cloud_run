@@ -1,8 +1,8 @@
 
 model_list:
-  - model_name: gpt-3.5-turbo
-    litellm_params:
-      model: "gemini/gemini-2.0-flash-thinking-exp-01-21"
+  - model_name: "gemini-2.0-flash-thinking-exp-01-21"
+    litellm_params: 
+      model: "gpt-3.5-turbo"
       api_key: "os.environ/GOOGLE_API_KEY"
       api_base: "os.environ/GOOGLE_API_BASE"
       api_version: ""
