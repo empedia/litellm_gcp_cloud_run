@@ -11,4 +11,4 @@ COPY litellm_config.yaml .
 # Expose the necessary port
 EXPOSE 4000/tcp
 
-CMD ["--port", $PORT, "--config", "litellm_config.yaml"]
+CMD ["--port", "$PORT", "--config", "litellm_config.yaml"]
